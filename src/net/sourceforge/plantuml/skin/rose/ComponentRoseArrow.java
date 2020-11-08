@@ -324,7 +324,7 @@ public class ComponentRoseArrow extends AbstractComponentRoseArrow {
 
 	@Override
 	public double getPreferredWidth(StringBounder stringBounder) {
-		return getTextWidth(stringBounder) + getArrowDeltaX();
+		return getArrowDeltaX();
 	}
 
 }
