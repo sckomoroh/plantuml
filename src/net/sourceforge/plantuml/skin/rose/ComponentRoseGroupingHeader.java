@@ -5,12 +5,12 @@
  * (C) Copyright 2009-2020, Arnaud Roques
  *
  * Project Info:  http://plantuml.com
- * 
+ *
  * If you like this project or if you find it useful, you can support us at:
- * 
+ *
  * http://plantuml.com/patreon (only 1$ per month!)
  * http://plantuml.com/paypal
- * 
+ *
  * This file is part of PlantUML.
  *
  * PlantUML is free software; you can redistribute it and/or modify it
@@ -30,7 +30,7 @@
  *
  *
  * Original Author:  Arnaud Roques
- * 
+ *
  *
  */
 package net.sourceforge.plantuml.skin.rose;
@@ -108,27 +108,19 @@ public class ComponentRoseGroupingHeader extends AbstractTextualComponent {
 
 	private double getSuppHeightForComment(StringBounder stringBounder) {
 		if (commentTextBlock == null) {
-			return 0;
+			return 5;
 		}
-		final double height = commentTextBlock.calculateDimension(stringBounder).getHeight();
-		if (height > 15) {
-			return height - 15;
-		}
-		return 0;
-
+		return commentTextBlock.calculateDimension(stringBounder).getHeight();
 	}
 
 	@Override
 	final public double getPreferredWidth(StringBounder stringBounder) {
-		final double sup;
-		if (commentTextBlock == null) {
-			sup = commentMargin * 2;
-		} else {
+		double commentTextWidth = 0;
+		if (commentTextBlock != null) {
 			final Dimension2D size = commentTextBlock.calculateDimension(stringBounder);
-			sup = getMarginX1() + commentMargin + size.getWidth();
-
+			commentTextWidth = getMarginX1() + commentMargin + size.getWidth();
 		}
-		return getTextWidth(stringBounder) + sup;
+		return Math.max(getTextWidth(stringBounder), commentTextWidth) + getMarginX1();
 	}
 
 	@Override
@@ -172,10 +164,10 @@ public class ComponentRoseGroupingHeader extends AbstractTextualComponent {
 		getTextBlock().drawU(ug.apply(new UTranslate(getMarginX1(), getMarginY())));
 
 		if (commentTextBlock != null) {
-			final int x1 = getMarginX1() + textWidth;
-			final int y2 = getMarginY() + 1;
+			final int x1 = 5;
+			final int y2 = getMarginY() + textHeight;
 
-			commentTextBlock.drawU(ug.apply(new UTranslate(x1 + commentMargin, y2)));
+			commentTextBlock.drawU(ug.apply(new UTranslate(x1, y2)));
 		}
 	}
 
