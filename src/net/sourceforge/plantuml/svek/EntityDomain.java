@@ -51,7 +51,7 @@ public class EntityDomain extends AbstractTextBlock implements TextBlock {
 
 	private final double margin = 4;
 
-	private final double radius = 12;
+	private final double radius = 30;
 	private final double suppY = 2;
 	private final SymbolContext symbolContext;
 
