@@ -43,6 +43,7 @@ import net.sourceforge.plantuml.graphic.StringBounder;
 import net.sourceforge.plantuml.graphic.SymbolContext;
 import net.sourceforge.plantuml.skin.AbstractComponent;
 import net.sourceforge.plantuml.skin.Area;
+import net.sourceforge.plantuml.style.PName;
 import net.sourceforge.plantuml.style.Style;
 import net.sourceforge.plantuml.ugraphic.UGraphic;
 import net.sourceforge.plantuml.ugraphic.ULine;
@@ -55,6 +56,7 @@ public class ComponentRoseActiveLine extends AbstractComponent {
 	private final SymbolContext symbolContext;
 	private final boolean closeUp;
 	private final boolean closeDown;
+	private final double roundCorner;
 
 	public ComponentRoseActiveLine(ThemeStyle themeStyle, Style style, SymbolContext symbolContext, boolean closeUp,
 			boolean closeDown, HColorSet set) {
@@ -62,6 +64,7 @@ public class ComponentRoseActiveLine extends AbstractComponent {
 		if (UseStyle.useBetaStyle()) {
 			symbolContext = style.getSymbolContext(themeStyle, set);
 		}
+		this.roundCorner = 8;
 		this.symbolContext = symbolContext;
 		this.closeUp = closeUp;
 		this.closeDown = closeDown;
@@ -76,7 +79,7 @@ public class ComponentRoseActiveLine extends AbstractComponent {
 			return;
 		}
 
-		final URectangle rect = new URectangle(getPreferredWidth(stringBounder), dimensionToUse.getHeight());
+		final URectangle rect = new URectangle(getPreferredWidth(stringBounder), dimensionToUse.getHeight()).rounded(roundCorner);
 		if (symbolContext.isShadowing()) {
 			rect.setDeltaShadow(1);
 		}
@@ -108,6 +111,6 @@ public class ComponentRoseActiveLine extends AbstractComponent {
 
 	@Override
 	public double getPreferredWidth(StringBounder stringBounder) {
-		return 10;
+		return 13;
 	}
 }
