@@ -59,5 +59,7 @@ public abstract class AbstractComponentText implements Component {
 		throw new UnsupportedOperationException();
 	}
 
-
+	public double getTextHeight(StringBounder stringBounder) {
+		throw new UnsupportedOperationException();
+	}
 }

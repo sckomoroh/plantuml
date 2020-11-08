@@ -104,6 +104,10 @@ abstract class Arrow extends GraphicalElement implements InGroupable {
 		return getPreferredWidth(stringBounder);
 	}
 
+	public double getArrowOnlyHeight(StringBounder stringBounder) {
+		return getPreferredHeight(stringBounder) - arrowComponent.getTextHeight(stringBounder);
+	}
+
 	public abstract double getArrowYStartLevel(StringBounder stringBounder);
 
 	public abstract double getArrowYEndLevel(StringBounder stringBounder);

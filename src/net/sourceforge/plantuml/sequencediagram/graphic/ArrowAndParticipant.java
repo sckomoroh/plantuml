@@ -93,31 +93,26 @@ class ArrowAndParticipant extends Arrow implements InGroupable {
 		final double participantBoxStartingX = participantBox.getStartingX();
 		final double arrowStartingX = arrow.getStartingX(ug.getStringBounder());
 
+		double offsetY = getOffsetY(ug.getStringBounder());
+
 		if (arrowStartingX < participantBoxStartingX) {
-			arrow.drawInternalU(ug, maxX, context);
+			arrow.drawInternalU(ug.apply(UTranslate.dy(offsetY)), maxX, context);
 		} else {
 			final double boxWidth = participantBox.getPreferredWidth(ug.getStringBounder());
-			arrow.drawInternalU(ug.apply(UTranslate.dx(boxWidth / 2 - paddingParticipant)), maxX, context);
+			arrow.drawInternalU(ug.apply(new UTranslate(boxWidth / 2 - paddingParticipant, offsetY)), maxX, context);
 		}
 
-		final double arrowHeight = arrow.getPreferredHeight(ug.getStringBounder());
-		final double boxHeight = participantBox.getHeadHeight(ug.getStringBounder());
-		// final double diff = getDiff(ug);
-		double diff = 0;
-		if (arrowHeight > boxHeight) {
-			diff = arrowHeight - boxHeight;
-		}
 		if (context.isBackground() == false) {
 			participantBox
-					.drawParticipantHead(ug.apply(new UTranslate(participantBoxStartingX, getStartingY() + diff)));
+					.drawParticipantHead(ug.apply(new UTranslate(participantBoxStartingX, getStartingY())));
 		}
 	}
 
-	private double getDiff(UGraphic ug) {
-		final double y1 = arrow.getPreferredHeight(ug.getStringBounder());
-		final double y2 = participantBox.getHeadHeight(ug.getStringBounder());
-		final double diff = y1 - y2;
-		return diff;
+	private double getOffsetY(StringBounder stringBounder) {
+		final double arrowHeight = arrow.getArrowOnlyHeight(stringBounder);
+		final double arrowTextHeight = arrow.getPreferredHeight(stringBounder) - arrowHeight;
+		final double boxHeight = participantBox.getHeadHeightOnly(stringBounder);
+		return (boxHeight - arrowHeight) / 2 - arrowTextHeight;
 	}
 
 	@Override

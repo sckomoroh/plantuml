@@ -138,7 +138,7 @@ public abstract class AbstractTextualComponent extends AbstractComponent {
 		return getPureTextWidth(stringBounder) + marginX1 + marginX2;
 	}
 
-	final protected double getTextHeight(StringBounder stringBounder) {
+	final public double getTextHeight(StringBounder stringBounder) {
 		final TextBlock textBlock = getTextBlock();
 		final Dimension2D size = textBlock.calculateDimension(stringBounder);
 		return size.getHeight() + 2 * marginY;

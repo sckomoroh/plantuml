@@ -52,5 +52,6 @@ public interface ArrowComponent extends Component {
 	
 	public double getPosArrow(StringBounder stringBounder);
 
+	public double getTextHeight(StringBounder stringBounder);
 
 }
