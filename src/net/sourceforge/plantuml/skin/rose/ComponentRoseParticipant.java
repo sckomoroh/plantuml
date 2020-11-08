@@ -65,6 +65,7 @@ public class ComponentRoseParticipant extends AbstractTextualComponent {
 	private final double diagonalCorner;
 	private final UStroke stroke;
 	private final double minWidth;
+	private final double minHeight;
 	private final boolean collections;
 	private final double padding;
 
@@ -86,6 +87,7 @@ public class ComponentRoseParticipant extends AbstractTextualComponent {
 		}
 		this.padding = padding;
 		this.minWidth = minWidth;
+		this.minHeight = 68;
 		this.collections = collections;
 		this.back = biColor.getBackColor();
 		this.deltaShadow = biColor.getDeltaShadow();
@@ -98,7 +100,7 @@ public class ComponentRoseParticipant extends AbstractTextualComponent {
 		ug = ug.apply(UTranslate.dx(padding));
 		ug = ug.apply(back.bg()).apply(foregroundColor);
 		ug = ug.apply(stroke);
-		final Shadowable rect = new URectangle(getTextWidth(stringBounder), getTextHeight(stringBounder))
+		final Shadowable rect = new URectangle(getTextWidth(stringBounder), Math.max(getTextHeight(stringBounder), minHeight))
 				.rounded(roundCorner).diagonalCorner(diagonalCorner);
 		rect.setDeltaShadow(deltaShadow);
 		if (collections) {
@@ -120,7 +122,7 @@ public class ComponentRoseParticipant extends AbstractTextualComponent {
 
 	@Override
 	public double getPreferredHeight(StringBounder stringBounder) {
-		return getTextHeight(stringBounder) + deltaShadow + 1 + getDeltaCollection();
+		return Math.max(getTextHeight(stringBounder), minHeight) + deltaShadow + 1 + getDeltaCollection();
 	}
 
 	@Override
