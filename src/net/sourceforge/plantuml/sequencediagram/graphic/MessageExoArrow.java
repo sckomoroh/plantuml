@@ -127,7 +127,9 @@ public class MessageExoArrow extends Arrow {
 
 	@Override
 	public double getPreferredWidth(StringBounder stringBounder) {
-		double result = getArrowComponent().getPreferredWidth(stringBounder);
+		final AbstractComponentRoseArrow arrowComponent = (AbstractComponentRoseArrow) getArrowComponent();
+		double result = arrowComponent.getPreferredWidth(stringBounder) + arrowComponent.getTextWidth(stringBounder);
+		
 		if (arrowConfiguration.getDecoration2() == ArrowDecoration.CIRCLE && type == MessageExoType.TO_RIGHT) {
 			result += ComponentRoseArrow.diamCircle;
 		}
