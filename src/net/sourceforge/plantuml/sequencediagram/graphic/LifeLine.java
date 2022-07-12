@@ -43,6 +43,7 @@ import java.util.List;
 
 import net.sourceforge.plantuml.ColorParam;
 import net.sourceforge.plantuml.ISkinParam;
+import net.sourceforge.plantuml.Log;
 import net.sourceforge.plantuml.SkinParamBackcolored;
 import net.sourceforge.plantuml.SkinParamForceColor;
 import net.sourceforge.plantuml.graphic.StringBounder;
@@ -239,7 +240,9 @@ public class LifeLine {
 	// private double destroy = 0;
 
 	public final void setCreate(double create) {
-		this.create = create;
+		if (this.create == 0) {
+			this.create = create;
+		}
 	}
 
 	public final double getCreate() {
